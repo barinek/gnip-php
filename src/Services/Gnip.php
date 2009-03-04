@@ -393,6 +393,19 @@ class Services_Gnip {
 
 
     /**
+     * Gives you the server clock offset so you can better calculate
+     * bucket times. The number you get back from this function should 
+     * then be added to your time to get the correct time with offset
+     * included.
+     * 
+     * @return long difference
+     */
+    function getGnipClockOffset(){
+        return $this->helper->getGnipClockOffset();
+    }
+
+
+    /**
      * Parses XML data from the server into an array of objects.
      * 
      * @param XML $xml
