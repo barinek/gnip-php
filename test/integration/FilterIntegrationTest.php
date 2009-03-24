@@ -8,16 +8,17 @@ class FilterIntegrationTest extends PHPUnit_Framework_TestCase
         //edit the following with your relevant data.
         
         $this->gnip = new Services_Gnip("", "");
-        $this->scope = "my"; // publisher must be owned by you
-        $this->pubName = ""; //string of your publisher
+        $this->scope = "gnip"; // publisher must be correctly scoped
+        $this->pubName = "twitter"; //string name of your publisher
         $this->publisher = new Services_Gnip_Publisher($this->pubName, "actor");
         //end editable section
 
         $rules = array(new Services_Gnip_Rule("actor", "me"), 
             new Services_Gnip_Rule("actor", "you"), 
             new Services_Gnip_Rule("actor", "bob"));
-
-        $this->filter = new Services_Gnip_Filter(uniqid('apitestfilter'), 'false', '', $rules);
+        
+        $this->filterName = uniqid('apitestfilter');
+        $this->filter = new Services_Gnip_Filter($this->filterName, 'false', '', $rules);
 
         $this->gnip->createFilter($this->pubName, $this->filter, $this->scope);
     }
@@ -32,6 +33,15 @@ class FilterIntegrationTest extends PHPUnit_Framework_TestCase
         $retrievedFilter = $this->gnip->getFilter($this->pubName, $this->filter->name, $this->scope);
         
         $this->assertContains("bob", $retrievedFilter->toXML());
+    }
+    
+    public function testGetAllFilters(){
+        $retrievedFilter = $this->gnip->getAllFilters($this->pubName, $this->scope);
+        $name_array = array();
+        foreach($retrievedFilter as $filter){
+            $name_array[] = $filter->name;
+        }
+        $this->assertContains($this->filterName, $name_array);
     }
     
     public function testCanUpdateFilter()

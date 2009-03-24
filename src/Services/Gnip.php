@@ -222,6 +222,29 @@ class Services_Gnip {
     }
 
 
+    /**
+     * Retrieves all filters on the Gnip servers for a given publisher in the system.
+     * 
+     * @param string $publisherName name of publisher
+     * @param string $scope publisher scope (my or gnip) default is gnip
+     * @return string response from the server
+     */    
+    function getAllFilters($publisherName, $scope="gnip") {
+        $scope = $this->_scopeprep($scope);
+        try {
+            $xml = $this->helper->doHttpGet($scope . Services_Gnip_Filter::getCreateUrl($publisherName));
+            $xml = new SimpleXMLElement($xml);
+            $filters = array();
+            foreach($xml->children() as $child) {
+                $filters[] = Services_Gnip_Filter::fromXML($child->asXML());
+            }
+            return $filters;
+        } catch (Exception $e){
+            $message = "There was a problem when calling getAllFilters(). Status message: ";
+            $this->_handleDebug($message, $this->debug, $e);
+        }
+    }
+
 
     /**
      * Creates a filter on the Gnip servers for any publisher in the system.
