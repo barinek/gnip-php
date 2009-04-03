@@ -1,20 +1,20 @@
 install php5 w/ pear
-	* on osx this is
-		> sudo port install curl +ipv6 +ssl
-		> sudo port install php5 +apache2 +pear
-	* on ubuntu
-	  > sudo apt-get install php5 php-pear
+    * on osx this is
+        > sudo port install curl +ipv6 +ssl
+        > sudo port install php5 +apache2 +pear
+    * on ubuntu
+      > sudo apt-get install php5 php-pear
 
 install phpunit 3.3.*
 
-	> sudo pear channel-discover pear.phpunit.de
-	> sudo pear install phpunit/PHPUnit-3.3.5
-	
+    > sudo pear channel-discover pear.phpunit.de
+    > sudo pear install phpunit/PHPUnit-3.3.5
+    
 install phing 2.3.*
-	
-	> sudo pear channel-discover pear.phing.info
-	> sudo pear install phing/phing
-	
+    
+    > sudo pear channel-discover pear.phing.info
+    > sudo pear install phing/phing
+    
 to run tests
-
-	> phing
+    * update the integration tests to include your credentialed information from Gnip
+    > phing
