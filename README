@@ -45,7 +45,7 @@ quick feedback to know if you can connect and access the public notification dat
 Also note that your requests must be scoped, "gnip" for publicly accessible publishers 
 and "my" for publishers you own. Please see Gnip.php for documentation.
 
-	<?
+	<?php
 	require_once 'src/Services/Gnip.php';
 	$gnip = new Services_Gnip("<your account email>", "<your account password>");
 	$pub = new Services_Gnip_Publisher("gnip-sample");
@@ -168,12 +168,12 @@ You can only retrieve activity data (full data) from publishers that you don't o
 by creating a filter.
 
 The test actor for "gnip-sample" is "jvaleski". To test your filter, be sure 
-"jvaleski"appears in your rule set.
+"jvaleski" appears in your rule set.
 
 The following examples illustrate creating filters for both notification and activity 
 data. Additionally, the two examples show how to use/not use the post URL parameter.
 
-*** Notificiation Filter without POST URL ***
+*** Notification Filter without POST URL ***
 
 Note that the full data (second parameter) of the filter object must be set to 
 false. This example does not include a POST Url, meaning you'll have to poll 
@@ -452,5 +452,5 @@ To get started create a clone of the main repository,
 discuss any changes you are making on the mailing list to get feed
 back from the other users. Once you are ready to publish your changes
 you can send them to the mailing list or, if you are using GitHub,
-send a pull request to the owner of the main repositiory.
+send a pull request to the owner of the main repository.
  
