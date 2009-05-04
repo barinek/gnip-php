@@ -78,7 +78,7 @@ class Services_Gnip_Helper {
      * @return string status of request
      */
     function doHttpDelete($url) {
-        return $this->doRequest($this->base_url.$url, array(CURLOPT_CUSTOMREQUEST => "DELETE"));
+        return $this->doRequest($this->base_url.$url, array(CURLOPT_CUSTOMREQUEST => "DELETE"), true);
     }
     
 
@@ -183,7 +183,7 @@ class Services_Gnip_Helper {
      * @param boolean $isGzipEncoded default is true
      * @return string response
      */
-    function doRequest($url, $curl_options = array(), $isGzipEncoded = true) {
+    function doRequest($url, $curl_options = array(), $isGzipEncoded = FALSE) {
         $curl = curl_init();
 
         $loginInfo = sprintf("%s:%s",$this->username,$this->password);
