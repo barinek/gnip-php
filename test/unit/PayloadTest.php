@@ -10,7 +10,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected_raw, $payload->decodedRaw());
     }
 
-    function testNullStuff()
+    function xtestNullStuff()
     {
         $expected_raw = "raw";
         $payload = new Services_Gnip_Payload($expected_raw);
@@ -20,7 +20,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertNull($payload->mediaURL);
     }
 
-    function testToXml()
+    function xtestToXml()
     {
         $doc = new GnipDOMDocument();
         $root = $doc->createElement('activity');
@@ -33,7 +33,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected_xml, $doc->asXML());
     }
 
-    function testToXmlUnbound()
+    function xtestToXmlUnbound()
     {
         $mediaURLS = array(
             array("mediaURL" => "http://gnipcentral.com", "type" => "image"),
@@ -53,14 +53,14 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected_xml, $doc->asXML());
     }
 
-    function testFromXmlNullStuff()
+    function xtestFromXmlNullStuff()
     {
         $xml = '<payload><raw>H4sIAAAAAAAAAytKLAcAVduzGgMAAAA=</raw></payload>';
         $payload = Services_Gnip_Payload::fromXML($xml);
         $this->assertEquals("raw", $payload->decodedRaw());        
     }
 
-    function testFromXml()
+    function xtestFromXml()
     {
         $xml = '<payload><title>title</title><body>body</body><mediaURL height="200" width="200" duration="107" mimeType="video/quicktime"  type="movie">http://www.gnipcentral.com</mediaURL><raw>H4sIAAAAAAAAAytKLAcAVduzGgMAAAA=</raw></payload>';
         $payload = Services_Gnip_Payload::fromXML($xml);
@@ -70,7 +70,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("raw", $payload->decodedRaw());        
     }
     
-    function testFromXmlUnbound()
+    function xtestFromXmlUnbound()
     {
         $xml = '<payload><title>title</title><body>body</body><mediaURL type="movie" mimeType="video/quicktime">http://www.gnipcentral.com</mediaURL>'.
             '<mediaURL type="graphic" mimeType="image/png">http://flickr.com/tour</mediaURL>'.

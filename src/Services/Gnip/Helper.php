@@ -189,11 +189,13 @@ class Services_Gnip_Helper {
         $loginInfo = sprintf("%s:%s",$this->username,$this->password);
         $headers = array("Content-Type: application/xml", "User-Agent: Gnip-Client-PHP/2.1",
                          "Authorization: Basic ".base64_encode($loginInfo));
+                         
+  
         if($isGzipEncoded){
             $headers[] = 'Content-Encoding: gzip';
             curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate');
         }
-
+        curl_setopt($curl, CURLINFO_HEADER_OUT, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($curl, CURLOPT_USERPWD, $loginInfo);
@@ -202,6 +204,7 @@ class Services_Gnip_Helper {
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         //curl_setopt($curl, CURLOPT_VERBOSE, 1);   // litter logs with crap
         //curl_setopt($curl, CURLOPT_STDERR, STDOUT);  // spit the crap into stdout
@@ -209,9 +212,10 @@ class Services_Gnip_Helper {
         foreach ($curl_options as $option => $value) {
             curl_setopt($curl, $option, $value);
         }
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        
         $response = curl_exec($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        
         curl_close($curl);
 
         switch($http_code){
